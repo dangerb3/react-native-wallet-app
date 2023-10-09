@@ -8,11 +8,14 @@ import { colors } from '../colors'
 import card_bg from "../../assets/bgs/background_transparent.png"
 import RegularText from '../Texts/RegularText'
 import SmallText from '../Texts/SmallText'
+import { useNavigation } from '@react-navigation/native'
+import { Props as HomeProps } from '../../screens/Home'
 
 const CardBackground = styled(ImageBackground)`
   height: 75%;
   width: ${ScreenWidth * 0.67}px;
-  resize-mode: cover;
+  /* resize-mode: covrer; */
+  object-fit: fill;
   background-color: ${colors.accent};
   border-radius: 25px;
   margin-right: 25px;
@@ -46,7 +49,11 @@ const Logo = styled(Image)`
 `
 
 const CardItem: FC<CardProps> = (props) => {
-  const handlePress = () => { }
+  const navigation = useNavigation<HomeProps["navigation"]>()
+
+  const handlePress = () => {
+    navigation.navigate("Balance", { ...props })
+  }
 
   return (
     <CardBackground source={card_bg}>
